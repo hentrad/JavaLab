@@ -2,7 +2,7 @@ package com.hensin.lab1;
 
 public class MainBox {
     public static void main(String[] args) {
-        Box p = new Box(0);  // Временное значение, потом перезапишется
+        Box p = new Box(0);
         
         p.inputBox();
         
