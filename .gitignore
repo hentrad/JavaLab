@@ -1,0 +1,13 @@
+bin/
+*.class
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+*.log
+
+*.tmp
+*.temp

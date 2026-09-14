@@ -1,0 +1,75 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MainBox",
+            "request": "launch",
+            "mainClass": "com.hensin.lab1.MainBox",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainArrayOnJava",
+            "request": "launch",
+            "mainClass": "com.hensin.lab2.MainArrayOnJava",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainMicrobe",
+            "request": "launch",
+            "mainClass": "com.hensin.lab3.MainMicrobe",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainTestRunner",
+            "request": "launch",
+            "mainClass": "com.hensin.MainTestRunner",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainTestRunner (все тесты)",
+            "request": "launch",
+            "mainClass": "com.hensin.MainTestRunner",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "Lab 1 - MainBox",
+            "request": "launch",
+            "mainClass": "com.hensin.lab1.MainBox",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "Lab 2 - MainArrayOnJava",
+            "request": "launch",
+            "mainClass": "com.hensin.lab2.MainArrayOnJava",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "Lab 3 - MainMicrobe",
+            "request": "launch",
+            "mainClass": "com.hensin.lab3.MainMicrobe",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "Lab 1 - Box",
+            "request": "launch",
+            "mainClass": "com.hensin.lab1.Box",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "Lab 2 - ArrayOnJava",
+            "request": "launch",
+            "mainClass": "com.hensin.lab2.ArrayOnJava",
+            "projectName": "java_ca206b08"
+        }
+    ]
+}
