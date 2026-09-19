@@ -1,41 +1,42 @@
 package com.hensin.lab3;
 
+import com.hensin.LabException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Microbe {
     private int time;
-    
+
     public Microbe() {}
-    
-    public Microbe(int time) {
+
+    public Microbe(int time) throws LabException {
+        if (time < 0 || time > 30) {
+            throw new LabException("time ожидалось в [0..30], получено: " + time);
+        }
         this.time = time;
     }
-    
-    public void inputTime() {
-        Scanner scanner = new Scanner(System.in);
-        boolean valid = false;
 
+    public void inputTime(Scanner scanner) {
+        boolean valid;
         do {
             try {
-                System.out.print("Момент времени (целое число минут t ∈ [0..30]): ");
+                System.out.print("Момент времени (0..30): ");
                 time = scanner.nextInt();
-                if (time < 0 | time > 30) {
-                    continue;
-                }
-                valid = true;
+                valid = time >= 0 && time <= 30;
+                
             } catch (InputMismatchException e) {
                 scanner.next();
+                valid = false;
             }
         } while (!valid);
-        scanner.close();
     }
-    
-    public long countBacteria() {
+
+    public long countBacteria() throws LabException {
+        if (time < 0 || time > 30) {
+            throw new LabException("time ожидалось в [0..30], получено: " + time);
+        }
         return 1L << time;
     }
-    
-    public int getTime() {
-        return time;
-    }
+
+    public int getTime() { return time; }
 }

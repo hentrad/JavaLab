@@ -3,77 +3,81 @@ package com.hensin.lab1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.hensin.LabException;
+
 public class Box {
 
     int ball;
     boolean isAlive;
 
-    Box(int ball) {
+    public Box(int ball) {
         this.ball = ball;
         this.isAlive = false;
     }
-    
-        public void inputBox() {
-        Scanner scanner = new Scanner(System.in);
-        
-        boolean valid = false;
-        do {
-            try {
-                System.out.print("ball (целое число): ");
-                ball = scanner.nextInt();
-                valid = true;
-            } catch (InputMismatchException e) {
-                scanner.next();
-            }
-        } while (!valid);
-        
-        valid = false;
-        do {
-            try {
-                System.out.print("isAlive (true/false): ");
-                isAlive = scanner.nextBoolean();
-                valid = true;
-            } catch (InputMismatchException e) {
-                scanner.next();
-            }
-        } while (!valid);
-        
-        scanner.close();
-    }
 
-    int add(int a) {
+public void inputBox(Scanner scanner) {
+    boolean valid;
+    do {
+        try {
+            System.out.print("ball целое положительное: ");
+            ball = scanner.nextInt();
+            valid = ball >= 0;
+        } catch (InputMismatchException e) {
+            scanner.next();
+            valid = false;
+        }
+    } while (!valid);
+
+    do {
+        try {
+            System.out.print("isAlive (true/false): ");
+            isAlive = scanner.nextBoolean();
+            valid = true;
+        } catch (InputMismatchException e) {
+            scanner.next();
+            valid = false;
+        }
+    } while (!valid);
+}
+
+    public int getBall() { return ball; }
+    public boolean isAlive() { return isAlive; }
+
+    public int add(int a) {
         return ball + a;
     }
 
-    int add1(int a) {
+    public int add1(int a) throws LabException {
+        if (a == 0) throw new LabException("Деление на ноль: a = 0");
         return ball / a;
     }
 
-    int add2(int a) {
+    public int add2(int a) {
         return ball *= a;
     }
 
-    int add3(int a) {
+    public int add3(int a) throws LabException {
+        if (a < 0) throw new LabException("Сдвиг не может быть отрицательным: " + a);
         return ball >> a;
     }
 
-    int add4(int a) {
+    public int add4(int a) {
         return a >>>= ball;
     }
 
-    boolean add5(int a) {
+    public boolean add5(int a) {
         return ball >= a;
     }
 
-    boolean add6(boolean aa) {
+    public boolean add6(boolean aa) {
         return isAlive | aa;
     }
 
-    boolean add7(boolean aa) {
+    public boolean add7(boolean aa) {
         return isAlive && aa;
     }
 
-    boolean add8(boolean aa) {
+    public boolean add8(boolean aa) {
         return isAlive != aa;
     }
 
@@ -83,7 +87,8 @@ public class Box {
         return ball + x * b;
     }
 
-    int pr2(int x, int b) {
+    int pr2(int x, int b) throws LabException {
+        if (b == 0) throw new LabException("Деление на ноль: b = 0");
         return ball + x / b;
     }
 
@@ -105,11 +110,13 @@ public class Box {
         return c + ball + d;
     }
 
-    int as2(int c, int d) {
+    int as2(int c, int d) throws LabException {
+        if (ball == 0 || d == 0) throw new LabException("Деление на ноль ball: = 0 || d = 0");
         return c / ball / d;
     }
 
-    int as3(int c, int d) {
+    int as3(int c, int d) throws LabException {
+        if (ball < 0 || d < 0) throw new LabException("Отрицательный сдвиг");
         return c >> ball >> d;
     }
 

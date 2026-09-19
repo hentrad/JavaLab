@@ -2,6 +2,8 @@ package com.hensin.lab1;
 
 import org.junit.jupiter.api.Test;
 
+import com.hensin.LabException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,7 +19,7 @@ public class BoxTest {
     }
 
     @Test
-    public void testPr2() {
+    public void testPr2() throws LabException {
         Box p = new Box(11);
         assertEquals(13, p.pr2(5, 2));
         assertEquals(11, p.pr2(0, 3));
@@ -57,7 +59,7 @@ public class BoxTest {
     }
 
     @Test
-    public void testAs2() {
+    public void testAs2() throws LabException {
         Box p = new Box(5);
         assertEquals(2, p.as2(20, 2));
         assertEquals(0, p.as2(10, 3));
@@ -65,7 +67,7 @@ public class BoxTest {
     }
 
     @Test
-    public void testAs3() {
+    public void testAs3() throws LabException {
         Box p = new Box(10);
         assertEquals(0, p.as3(32, 1));
         assertEquals(0, p.as3(20, 2));
@@ -85,7 +87,6 @@ public class BoxTest {
         Box p = new Box(10);
         assertTrue(p.as5(true, true, true));
         assertFalse(p.as5(true, true, false));
-
         assertFalse(p.as5(false, true, true));
     }
     

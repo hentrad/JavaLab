@@ -3,6 +3,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainStringOps",
+            "request": "launch",
+            "mainClass": "com.hensin.lab5.MainStringOps",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.hensin.App",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
             "name": "MainBox",
             "request": "launch",
             "mainClass": "com.hensin.lab1.MainBox",
