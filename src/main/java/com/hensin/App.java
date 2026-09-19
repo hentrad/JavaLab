@@ -49,37 +49,37 @@ public class App {
         labs.add(new StringOpsLab());
 
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        
+        boolean exit = false;
+        do {
             clearConsole();
             System.out.println("Пакет:");
             for (int i = 0; i < labs.size(); i++) {
                 System.out.println((i + 1) + ". " + labs.get(i).getTitle());
-            }
+                }
             System.out.println("0. Выход");
 
             int choice;
             try {
                 choice = scanner.nextInt();
+                scanner.nextLine();
             } catch (Exception e) {
-                scanner.next();
+                scanner.nextLine();
                 continue;
             }
 
-            if (choice == 0) break;
-            if (choice < 1 || choice > labs.size()) {
-                continue;
-            }
+            if (choice == 0) {
+                exit = true;
+            } else if (choice >= 1 && choice <= labs.size()) {
+                clearConsole();
+                labs.get(choice - 1).run(scanner);
 
-            clearConsole();
-            labs.get(choice - 1).run(scanner);
-            
-            System.out.println("\nEnter...");
-            scanner.nextLine();
-            scanner.nextLine();
-        }
+                System.out.println("\nEnter...");
+                scanner.nextLine();
+                scanner.nextLine();
+            }
+        } while (!exit);
 
         scanner.close();
-        System.out.println("Выход");
     }
 }
