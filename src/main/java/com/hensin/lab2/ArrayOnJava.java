@@ -1,6 +1,8 @@
 package com.hensin.lab2;
 
 import com.hensin.LabException;
+import com.hensin.LabException.Code;
+
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class ArrayOnJava {
 
     public ArrayOnJava(int[] newArray) throws LabException {
         if (newArray == null || newArray.length == 0) {
-            throw new LabException("Массив пустой или null");
+            throw new LabException(Code.ARRAY_NULL_OR_EMPTY);
         }
         this.array = newArray;
     }
@@ -31,10 +33,10 @@ public class ArrayOnJava {
         } while (size <= 0);
 
         if (size <= 0) {
-            throw new LabException("Размер должен быть > 0, получено: " + size);
+            throw new LabException(Code.ARRAY_NULL_OR_EMPTY, size);
         }
         if (size > 100_000) {
-            throw new LabException("Слишком большой размер: " + size);
+            throw new LabException(Code.ARRAY_SIZE_TOO_BIG, size);
         }
 
         array = new int[size];
@@ -55,17 +57,17 @@ public class ArrayOnJava {
     }
 
     public void printArray() throws LabException {
-        if (array == null) throw new LabException("Массив не инициализирован");
+        if (array == null) throw new LabException(Code.ARRAY_NOT_INITIALIZED);
         System.out.println(Arrays.toString(array));
     }
 
     public void sortArray() throws LabException {
-        if (array == null) throw new LabException("Массив не инициализирован");
+        if (array == null) throw new LabException(Code.ARRAY_NOT_INITIALIZED);
         Arrays.sort(array);
     }
 
     public int countNum() throws LabException {
-        if (array == null) throw new LabException("Массив не инициализирован");
+        if (array == null) throw new LabException(Code.ARRAY_NOT_INITIALIZED);
         int count = 0;
         for (int num : array) {
             if (num % 3 == 0) count++;

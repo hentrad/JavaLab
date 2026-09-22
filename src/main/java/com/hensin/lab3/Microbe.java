@@ -1,6 +1,8 @@
 package com.hensin.lab3;
 
 import com.hensin.LabException;
+import com.hensin.LabException.Code;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,7 +13,7 @@ public class Microbe {
 
     public Microbe(int time) throws LabException {
         if (time < 0 || time > 30) {
-            throw new LabException("time ожидалось в [0..30], получено: " + time);
+            throw new LabException(Code.TIME_OUT_OF_RANGE, time);
         }
         this.time = time;
     }
@@ -33,7 +35,7 @@ public class Microbe {
 
     public long countBacteria() throws LabException {
         if (time < 0 || time > 30) {
-            throw new LabException("time ожидалось в [0..30], получено: " + time);
+            throw new LabException(Code.TIME_OUT_OF_RANGE, time);
         }
         return 1L << time;
     }

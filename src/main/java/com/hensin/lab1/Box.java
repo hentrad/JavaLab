@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.hensin.LabException;
+import com.hensin.LabException.Code;
 
 public class Box {
 
@@ -48,7 +49,7 @@ public void inputBox(Scanner scanner) {
     }
 
     public int add1(int a) throws LabException {
-        if (a == 0) throw new LabException("Деление на ноль: a = 0");
+        if (a == 0) throw new LabException(Code.DIVIDE_BY_ZERO, "a");
         return ball / a;
     }
 
@@ -57,7 +58,7 @@ public void inputBox(Scanner scanner) {
     }
 
     public int add3(int a) throws LabException {
-        if (a < 0) throw new LabException("Сдвиг не может быть отрицательным: " + a);
+        if (a < 0) throw new LabException(Code.NEGATIVE_SHIFT, a);
         return ball >> a;
     }
 
@@ -88,7 +89,7 @@ public void inputBox(Scanner scanner) {
     }
 
     int pr2(int x, int b) throws LabException {
-        if (b == 0) throw new LabException("Деление на ноль: b = 0");
+        if (b == 0) throw new LabException(Code.DIVIDE_BY_ZERO, b);
         return ball + x / b;
     }
 
@@ -111,12 +112,12 @@ public void inputBox(Scanner scanner) {
     }
 
     int as2(int c, int d) throws LabException {
-        if (ball == 0 || d == 0) throw new LabException("Деление на ноль ball: = 0 || d = 0");
+        if (ball == 0 || d == 0) throw new LabException(Code.DIVIDE_BY_ZERO, d);
         return c / ball / d;
     }
 
     int as3(int c, int d) throws LabException {
-        if (ball < 0 || d < 0) throw new LabException("Отрицательный сдвиг");
+        if (ball < 0 || d < 0) throw new LabException(Code.NEGATIVE_SHIFT, d);
         return c >> ball >> d;
     }
 
