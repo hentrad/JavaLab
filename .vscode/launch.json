@@ -3,6 +3,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainTestRunner",
+            "request": "launch",
+            "mainClass": "com.hensin.MainTestRunner",
+            "projectName": "JavaLab_272da021"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.hensin.App",
+            "projectName": "JavaLab_272da021"
+        },
+        {
+            "type": "java",
             "name": "MainStringOps",
             "request": "launch",
             "mainClass": "com.hensin.lab5.MainStringOps",
