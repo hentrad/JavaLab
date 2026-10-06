@@ -3,17 +3,37 @@ package com.hensin.lab7;
 import java.util.Random;
 
 public class ManagerThread implements Runnable {
-    private final SharedData sharedData;
 
-    public ManagerThread(SharedData sharedData) {
+    public static final int MIN_ITERATIONS = 1;
+    public static final int MAX_ITERATIONS = 10000;
+
+    private static final long PAUSE_MS = 2000L;
+
+    private final SharedData sharedData;
+    private final int iterations;
+
+    public ManagerThread(SharedData sharedData, int iterations) {
+        if (iterations < MIN_ITERATIONS || iterations > MAX_ITERATIONS) {
+            throw new IllegalArgumentException(
+                    "Количество итераций должно быть в ["
+                            + MIN_ITERATIONS + ".." + MAX_ITERATIONS + "], "
+                            + "получено: " + iterations);
+        }
         this.sharedData = sharedData;
+        this.iterations = iterations;
+    }
+
+    public int getIterations() {
+        return iterations;
     }
 
     @Override
     public void run() {
         Random random = new Random();
 
-        for (int i = 0; i < 5; i++) {
+        final int pauseAfter = iterations / 2;
+
+        for (int i = 0; i < iterations; i++) {
             int number = 1000 + random.nextInt(9000);
 
             synchronized (sharedData) {
@@ -26,7 +46,8 @@ public class ManagerThread implements Runnable {
                     }
                 }
 
-                System.out.println("\n[Управляющий поток] Передано число: " + number);
+                System.out.println("\nA: (" + (i + 1) + "/" + iterations 
+                                            + ") Передано число: " + number);
                 sharedData.setNumber(number);
                 sharedData.notify();
 
@@ -39,26 +60,28 @@ public class ManagerThread implements Runnable {
                     }
                 }
 
-                System.out.println("[Управляющий поток] Получен результат: " + sharedData.getProduct());
+                System.out.println("A: Получен результат: " + sharedData.getProduct());
 
-                // ВАЖНО: сбрасываем флаг готовности результата,
-                // иначе на следующей итерации цикл ожидания заблокирует поток
                 sharedData.consumeResult();
                 sharedData.notify();
             }
 
-            if (i == 2) {
-                System.out.println("\n>>> [Управляющий поток] Приостановка вычислительного процесса на 2 секунды...");
+            if (i == pauseAfter) {
+                System.out.println("\nA: Приостановка вычислительного процесса на " 
+                                    + (PAUSE_MS / 1000) + " секунды...");
                 sharedData.pause();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(PAUSE_MS);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                    sharedData.resume();
+                    return;
                 }
-                System.out.println(">>> [Управляющий поток] Возобновление вычислительного процесса.");
+                System.out.println("A: Возобновление вычислительного процесса.");
                 sharedData.resume();
             }
         }
-        System.out.println("\n[Управляющий поток] Работа завершена.");
+
+        System.out.println("\nA: Работа завершена.");
     }
 }

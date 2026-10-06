@@ -7,14 +7,22 @@ public class ComputeThread implements Runnable {
         this.sharedData = sharedData;
     }
 
+    public static int productOfDigits(int num) {
+        int temp = num;
+        int product = 1;
+        while (temp > 0) {
+            product *= (temp % 10);
+            temp /= 10;
+        }
+        return product;
+    }
+
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             synchronized (sharedData) {
-                // Ожидание данных или снятия флага паузы
                 while (!sharedData.isDataReady() || sharedData.isPaused()) {
                     try {
-                        // Обязательный вызов wait() для синхронизации
                         sharedData.wait();
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
@@ -22,21 +30,13 @@ public class ComputeThread implements Runnable {
                     }
                 }
 
-                // Вычисление произведения цифр четырехзначного числа
                 int num = sharedData.getNumber();
-                int temp = num;
-                int product = 1;
-                
-                while (temp > 0) {
-                    product *= (temp % 10);
-                    temp /= 10;
-                }
+                int product = productOfDigits(num);
 
-                // Передача результата управляющему потоку
                 sharedData.setProduct(product);
-                System.out.println("[Вычислительный поток] Обработано число: " + num + ", произведение: " + product);
+                System.out.println("B: Обработано число: " + num
+                        + ", произведение: " + product);
 
-                // Уведомление управляющего потока о готовности результата
                 sharedData.notify();
             }
         }

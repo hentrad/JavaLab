@@ -6,6 +6,7 @@ import com.hensin.lab1.BoxTest;
 import com.hensin.lab2.ArrayOnJavaTest;
 import com.hensin.lab3.MicrobeTest;
 import com.hensin.lab5.StringOpsTest;
+import com.hensin.lab7.Lab7Test;
 
 public class MainTestRunner {
 
@@ -14,6 +15,7 @@ public class MainTestRunner {
         runTests("lab2 (ArrayOnJava)", ArrayOnJavaTest.class);
         runTests("lab3 (Microbe)", MicrobeTest.class);
         runTests("lab5 (StringOps)", StringOpsTest.class);
+        runTests("lab7 (Threads)", Lab7Test.class);
     }
 
     private static void runTests(String labName, Class<?> testClass) {

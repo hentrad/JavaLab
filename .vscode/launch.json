@@ -3,6 +3,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainThreads",
+            "request": "launch",
+            "mainClass": "com.hensin.lab7.MainThreads",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.hensin.App",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
             "name": "MainTestRunner",
             "request": "launch",
             "mainClass": "com.hensin.MainTestRunner",
@@ -20,13 +34,6 @@
             "name": "MainStringOps",
             "request": "launch",
             "mainClass": "com.hensin.lab5.MainStringOps",
-            "projectName": "java_ca206b08"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "com.hensin.App",
             "projectName": "java_ca206b08"
         },
         {

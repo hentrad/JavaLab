@@ -26,8 +26,7 @@ public class SharedData {
     public synchronized int getProduct() {
         return product;
     }
-
-    // Новый метод: "потребляет" результат, сбрасывая флаг готовности
+    
     public synchronized void consumeResult() {
         this.isResultReady = false;
     }
