@@ -1,44 +1,33 @@
 package com.hensin.lab7;
 
 public class ComputeThread implements Runnable {
-    private final SharedData sharedData;
 
-    public ComputeThread(SharedData sharedData) {
-        this.sharedData = sharedData;
-    }
+    private final SharedData exchange;
 
-    public static int productOfDigits(int num) {
-        int temp = num;
-        int product = 1;
-        while (temp > 0) {
-            product *= (temp % 10);
-            temp /= 10;
-        }
-        return product;
+    public ComputeThread(SharedData exchange) {
+        this.exchange = exchange;
     }
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (sharedData) {
-                while (!sharedData.isDataReady() || sharedData.isPaused()) {
-                    try {
-                        sharedData.wait();
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        return;
-                    }
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                int number = exchange.takeTask();
+
+                int product = 1;
+                int temp = number;
+                while (temp > 0) {
+                    product *= (temp % 10);
+                    temp /= 10;
                 }
 
-                int num = sharedData.getNumber();
-                int product = productOfDigits(num);
+                System.out.println("B: Число " + number + "; результат: " + product);
 
-                sharedData.setProduct(product);
-                System.out.println("B: Обработано число: " + num
-                        + ", произведение: " + product);
-
-                sharedData.notify();
+                exchange.putResult(product);
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+        System.out.println("B: Завершён.");
     }
 }

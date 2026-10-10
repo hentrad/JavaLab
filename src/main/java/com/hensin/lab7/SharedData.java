@@ -1,54 +1,57 @@
 package com.hensin.lab7;
 
 public class SharedData {
-    private int number;
-    private int product;
-    private boolean isDataReady = false;
-    private boolean isResultReady = false;
-    private boolean isPaused = false;
 
-    public synchronized void setNumber(int number) {
-        this.number = number;
-        this.isDataReady = true;
-        this.isResultReady = false;
+    private Integer task = null;
+    private Integer result = null;
+    private boolean paused = false;
+
+    public synchronized void putTask(int number) throws InterruptedException {
+        while (task != null) {
+            wait();
+        }
+        task = number;
+        notifyAll();
     }
 
-    public synchronized int getNumber() {
-        return number;
+    public synchronized int takeTask() throws InterruptedException {
+        while (task == null || paused) {
+            wait();
+        }
+        int value = task;
+        task = null;
+        notifyAll();
+        return value;
     }
 
-    public synchronized void setProduct(int product) {
-        this.product = product;
-        this.isDataReady = false;
-        this.isResultReady = true;
+    public synchronized void putResult(int value) throws InterruptedException {
+        while (result != null) {
+            wait();
+        }
+        result = value;
+        notifyAll();
     }
 
-    public synchronized int getProduct() {
-        return product;
-    }
-    
-    public synchronized void consumeResult() {
-        this.isResultReady = false;
-    }
-
-    public synchronized boolean isDataReady() {
-        return isDataReady;
-    }
-
-    public synchronized boolean isResultReady() {
-        return isResultReady;
+    public synchronized int takeResult() throws InterruptedException {
+        while (result == null) {
+            wait();
+        }
+        int value = result;
+        result = null;
+        notifyAll();
+        return value;
     }
 
     public synchronized void pause() {
-        this.isPaused = true;
+        paused = true;
     }
 
     public synchronized void resume() {
-        this.isPaused = false;
-        notify();
+        paused = false;
+        notifyAll();
     }
 
-    public synchronized boolean isPaused() {
-        return isPaused;
-    }
+    public synchronized boolean hasTask()   { return task != null; }
+    public synchronized boolean hasResult() { return result != null; }
+    public synchronized boolean isPaused()  { return paused; }
 }

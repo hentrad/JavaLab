@@ -1,8 +1,14 @@
 package com.hensin.lab7;
 
+import com.hensin.LabException;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainThreads {
+
+    private static final int MIN_ITER = 1;
+    private static final int MAX_ITER = 10000;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -11,43 +17,46 @@ public class MainThreads {
     }
 
     public static void run(Scanner scanner) {
-        int iterations = readIterations(scanner);
-
-        SharedData sharedData = new SharedData();
-
-        ComputeThread computeRunnable = new ComputeThread(sharedData);
-        ManagerThread managerRunnable = new ManagerThread(sharedData, iterations);
-
-        Thread computeThread = new Thread(computeRunnable, "ComputeThread");
-        Thread managerThread = new Thread(managerRunnable, "ManagerThread");
-
-        computeThread.start();
-        managerThread.start();
-
         try {
-            managerThread.join();
+            int iterations = inputIterations(scanner);
+
+            SharedData exchange = new SharedData();
+            ComputeThread compute = new ComputeThread(exchange);
+            ManagerThread manager = new ManagerThread(exchange, iterations);
+
+            Thread computeT = new Thread(compute, "ComputeThread");
+            Thread managerT = new Thread(manager, "ManagerThread");
+
+            System.out.println("запуск подпроцессов...\n");
+            computeT.start();
+            managerT.start();
+
+            managerT.join();
+            computeT.interrupt();
+            computeT.join(2000);
+
+            System.out.println("\nГлавный поток завершён.");
+
+        } catch (LabException e) {
+            System.out.println("Ошибка lab7: " + e.getMessage());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-
-        computeThread.interrupt();
     }
 
-    private static int readIterations(Scanner scanner) {
-    boolean valid;
-    int value = 0;
-    do {
-        System.out.print("Количество итераций ["
-                + ManagerThread.MIN_ITERATIONS + ".."
-                + ManagerThread.MAX_ITERATIONS + "]: ");
-        try {
-            String line = scanner.nextLine().trim();
-            value = Integer.parseInt(line);
-            valid = value >= ManagerThread.MIN_ITERATIONS && value <= ManagerThread.MAX_ITERATIONS;
-        } catch (NumberFormatException e) {
-            valid = false;
-        }
-    } while (!valid);
-    return value;
+    private static int inputIterations(Scanner scanner) {
+        int iterations = MIN_ITER;
+        boolean valid;
+        do {
+            try {
+                System.out.print("итераций [" + MIN_ITER + ".." + MAX_ITER + "]: ");
+                iterations = scanner.nextInt();
+                valid = iterations >= MIN_ITER && iterations <= MAX_ITER;
+            } catch (InputMismatchException e) {
+                scanner.next();
+                valid = false;
+            }
+        } while (!valid);
+        return iterations;
     }
 }

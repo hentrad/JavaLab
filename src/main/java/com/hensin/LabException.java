@@ -17,7 +17,10 @@ public class LabException extends Exception {
         STRING_NULL("Строка %s = null"),
         SYMBOL_NULL("Символ %s = null"),
         SYMBOL_EMPTY("Символ %s не может быть пустым"),
-        SYMBOL_MULTIPLE_CHARS("Символ %s должен состоять из одного символа");
+        SYMBOL_MULTIPLE_CHARS("Символ %s должен состоять из одного символа"),
+
+        ITERATIONS_OUT_OF_RANGE("Количество итераций ожидалось в [1..50], получено: %s");  // <-- новое
+
 
         private final String template;
 
