@@ -27,7 +27,6 @@ public class MainThreads {
             Thread computeT = new Thread(compute, "ComputeThread");
             Thread managerT = new Thread(manager, "ManagerThread");
 
-            System.out.println("запуск подпроцессов...\n");
             computeT.start();
             managerT.start();
 

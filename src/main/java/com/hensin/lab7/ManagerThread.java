@@ -9,7 +9,7 @@ public class ManagerThread implements Runnable {
 
     private final SharedData exchange;
     private final int iterations;
-    private int sleepTime = 5000;
+    private static final int SLEEP_TIME = 500;
 
     public ManagerThread(SharedData exchange, int iterations) throws LabException {
         if (iterations < 1 || iterations > 10000) {
@@ -27,18 +27,15 @@ public class ManagerThread implements Runnable {
                 int number = 1000 + random.nextInt(9000);
 
                 System.out.println("\n[" + (i + 1) + "/" + iterations + "]");
-                System.out.println("A передано число: " + number);
+                System.out.println("A передано: " + number);
                 exchange.putTask(number);
 
                 int result = exchange.takeResult();
-                System.out.println("A результат: " + result);
-
-                if (iterations >= 3 && i == iterations / 2) {
-                    System.out.println("A Пауза " + sleepTime / 1000 + " сек...");
+                System.out.println("A получено: " + result);
+                if (SLEEP_TIME > 0) {
                     exchange.pause();
-                    Thread.sleep(sleepTime);
+                    Thread.sleep(SLEEP_TIME);
                     exchange.resume();
-                    System.out.println("A Возобновление.");
                 }
             }
             System.out.println("\nA Работа завершена");

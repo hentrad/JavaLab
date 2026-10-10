@@ -21,7 +21,7 @@ public class ComputeThread implements Runnable {
                     temp /= 10;
                 }
 
-                System.out.println("B: Число " + number + "; результат: " + product);
+                System.out.println("B получено: " + number + ", результат: " + product);
 
                 exchange.putResult(product);
             }
