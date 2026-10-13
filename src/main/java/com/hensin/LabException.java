@@ -19,7 +19,12 @@ public class LabException extends Exception {
         SYMBOL_EMPTY("Символ %s не может быть пустым"),
         SYMBOL_MULTIPLE_CHARS("Символ %s должен состоять из одного символа"),
 
-        ITERATIONS_OUT_OF_RANGE("Количество итераций ожидалось в [1..50], получено: %s");  // <-- новое
+        ITERATIONS_OUT_OF_RANGE("Количество итераций ожидалось в [1..50], получено: %s"),
+
+        GREEN_TIME_OUT_OF_RANGE("Время зелёного света ожидалось в [1..300], получено: %s"),
+        LANES_OUT_OF_RANGE("Количество полос ожидалось в [1..8], получено: %s"),
+        CARS_OUT_OF_RANGE("Количество машин ожидалось в [0..200], получено: %s"),
+        CROSS_TIME_OUT_OF_RANGE("Секунд на одну машину ожидалось в [1..30], получено: %s");
 
 
         private final String template;

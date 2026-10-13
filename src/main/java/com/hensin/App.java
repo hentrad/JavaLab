@@ -5,6 +5,7 @@ import com.hensin.lab2.MainArrayOnJava;
 import com.hensin.lab3.MainMicrobe;
 import com.hensin.lab5.MainStringOps;
 import com.hensin.lab7.MainThreads;
+import com.hensin.lab8.MainTrafficLight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,11 @@ public class App {
         @Override public void run(Scanner scanner) { MainThreads.run(scanner); }
     }
 
+    public static class TrafficLab implements LabWork {
+        @Override public String getTitle() { return "lab8 (Traffic)"; }
+        @Override public void run(Scanner scanner) { MainTrafficLight.run(scanner); }
+    }
+
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -54,7 +60,8 @@ public class App {
         labs.add(new MicrobeLab());
         labs.add(new StringOpsLab());
         labs.add(new ThreadsLab());
-
+        labs.add(new TrafficLab());
+        
         Scanner scanner = new Scanner(System.in);
         
         boolean exit = false;

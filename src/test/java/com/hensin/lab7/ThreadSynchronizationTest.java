@@ -11,15 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ThreadSynchronizationTest {
 
-    /** Обёртка, чтобы перехватывать результаты для проверки. */
     static class RecordingExchange extends SharedData {
         final List<int[]> processed = new ArrayList<>();
 
         @Override
         public synchronized void putResult(int value) throws InterruptedException {
-            // В новом дизайне номер задачи уже стёрт из Exchange,
-            // поэтому запоминаем результат отдельно — а число
-            // восстанавливаем на стороне менеджера.
             super.putResult(value);
         }
     }
@@ -46,7 +42,6 @@ public class ThreadSynchronizationTest {
         manager.start();
 
         Thread.sleep(150);
-        // Менеджер положил задачу и ждёт результат в takeResult()
         assertEquals(Thread.State.WAITING, manager.getState());
 
         manager.interrupt();
@@ -76,7 +71,6 @@ public class ThreadSynchronizationTest {
     @Test
     @Timeout(value = 8, unit = TimeUnit.SECONDS)
     void testCorrectnessOfProduct() throws Exception {
-        // Управляющий кладёт заранее известные числа и проверяет произведение
         SharedData ex = new SharedData();
 
         int[] numbers = {1234, 2787, 9000, 5555, 1000};
@@ -108,7 +102,6 @@ public class ThreadSynchronizationTest {
         Thread compute = new Thread(new ComputeThread(ex));
         compute.start();
 
-        // Ставим паузу ДО отправки задачи
         ex.pause();
         ex.putTask(1234);
 
@@ -119,7 +112,6 @@ public class ThreadSynchronizationTest {
 
         ex.resume();
 
-        // Теперь результат должен появиться
         int product = ex.takeResult();
         assertEquals(24, product, "1·2·3·4 = 24");
 
