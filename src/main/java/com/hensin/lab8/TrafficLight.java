@@ -20,23 +20,21 @@ public class TrafficLight {
     private final int avgCrossTime;
 
     public TrafficLight(int greenTime, int lanes, int cars, int avgCrossTime) throws LabException {
-        if (greenTime < MIN_GREEN || greenTime > MAX_GREEN) {
-            throw new LabException(Code.GREEN_TIME_OUT_OF_RANGE, greenTime);
-        }
-        if (lanes < MIN_LANES || lanes > MAX_LANES) {
-            throw new LabException(Code.LANES_OUT_OF_RANGE, lanes);
-        }
-        if (cars < MIN_CARS || cars > MAX_CARS) {
-            throw new LabException(Code.CARS_OUT_OF_RANGE, cars);
-        }
-        if (avgCrossTime < MIN_CROSS || avgCrossTime > MAX_CROSS) {
-            throw new LabException(Code.CROSS_TIME_OUT_OF_RANGE, avgCrossTime);
-        }
+        check(greenTime,    MIN_GREEN, MAX_GREEN, Code.GREEN_TIME_OUT_OF_RANGE);
+        check(lanes,        MIN_LANES, MAX_LANES, Code.LANES_OUT_OF_RANGE);
+        check(cars,         MIN_CARS,  MAX_CARS,  Code.CARS_OUT_OF_RANGE);
+        check(avgCrossTime, MIN_CROSS, MAX_CROSS, Code.CROSS_TIME_OUT_OF_RANGE);
 
         this.greenTime = greenTime;
         this.lanes = lanes;
         this.cars = cars;
         this.avgCrossTime = avgCrossTime;
+    }
+
+    private static void check(int value, int min, int max, Code code) throws LabException {
+        if (value < min || value > max) {
+            throw new LabException(code, value);
+        }
     }
 
     public int getGreenTime()    { return greenTime; }
@@ -45,8 +43,7 @@ public class TrafficLight {
     public int getAvgCrossTime() { return avgCrossTime; }
 
     public int carsPassed() {
-        int perLane = greenTime / avgCrossTime;
-        return lanes * perLane;
+        return lanes * (greenTime / avgCrossTime);
     }
 
     public int carsRemaining() {
@@ -54,9 +51,6 @@ public class TrafficLight {
     }
 
     public int timeToClear() {
-        int remaining = carsRemaining();
-        if (remaining == 0) return 0;
-        int cycles = (int) Math.ceil(remaining / (double) lanes);
-        return cycles * avgCrossTime;
+        return (carsRemaining() + lanes - 1) / lanes * avgCrossTime;
     }
 }
