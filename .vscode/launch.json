@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainFileCleaner",
+            "request": "launch",
+            "mainClass": "com.hensin.lab9.MainFileCleaner",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
             "name": "MainThreads",
             "request": "launch",
             "mainClass": "com.hensin.lab7.MainThreads",

@@ -9,7 +9,7 @@ public class ManagerThread implements Runnable {
 
     private final SharedData exchange;
     private final int iterations;
-    private static final int SLEEP_TIME = 0;
+    private static final int SLEEP_TIME = 100;
 
     public ManagerThread(SharedData exchange, int iterations) throws LabException {
         if (iterations < 1 || iterations > 10000) {

@@ -6,6 +6,8 @@ import com.hensin.lab3.MainMicrobe;
 import com.hensin.lab5.MainStringOps;
 import com.hensin.lab7.MainThreads;
 import com.hensin.lab8.MainTrafficLight;
+import com.hensin.lab9.MainFileCleaner;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,11 @@ public class App {
         @Override public void run(Scanner scanner) { MainTrafficLight.run(scanner); }
     }
 
+    public static class FileDeleterLab implements LabWork {
+        @Override public String getTitle() { return "lab9 (FileDeleter)"; }
+        @Override public void run(Scanner scanner) { MainFileCleaner.run(scanner); }
+    }
+
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -61,6 +68,7 @@ public class App {
         labs.add(new StringOpsLab());
         labs.add(new ThreadsLab());
         labs.add(new TrafficLab());
+        labs.add(new FileDeleterLab());
         
         Scanner scanner = new Scanner(System.in);
         

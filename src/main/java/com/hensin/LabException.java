@@ -24,8 +24,14 @@ public class LabException extends Exception {
         GREEN_TIME_OUT_OF_RANGE("Время зелёного света ожидалось в [1..300], получено: %s"),
         LANES_OUT_OF_RANGE("Количество полос ожидалось в [1..8], получено: %s"),
         CARS_OUT_OF_RANGE("Количество машин ожидалось в [0..200], получено: %s"),
-        CROSS_TIME_OUT_OF_RANGE("Секунд на одну машину ожидалось в [1..30], получено: %s");
+        CROSS_TIME_OUT_OF_RANGE("Секунд на одну машину ожидалось в [1..30], получено: %s"),
 
+// Добавьте в enum Code:
+PATH_NULL_OR_EMPTY("Путь не может быть null или пустым"),
+PATH_NOT_FOUND("Папка не найдена: %s"),
+PATH_NOT_DIRECTORY("Указанный путь не является папкой: %s"),
+UNSAFE_PATH("Небезопасный путь (корневая директория): %s"),
+DELETE_FAILED("Не удалось удалить файл/папку: %s");
 
         private final String template;
 
