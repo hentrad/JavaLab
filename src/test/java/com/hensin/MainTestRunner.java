@@ -3,11 +3,13 @@ package com.hensin;
 import java.lang.reflect.Method;
 
 import com.hensin.lab1.BoxTest;
+import com.hensin.lab10.Lab10Test;
 import com.hensin.lab2.ArrayOnJavaTest;
 import com.hensin.lab3.MicrobeTest;
 import com.hensin.lab5.StringOpsTest;
 import com.hensin.lab7.ThreadSynchronizationTest;
 import com.hensin.lab9.Lab9Test;
+import com.hensin.lab10.Lab10Test;
 
 
 public class MainTestRunner {
@@ -19,6 +21,7 @@ public class MainTestRunner {
         runTests("lab5 (StringOps)", StringOpsTest.class);
         runTests("lab7 (Threads)", ThreadSynchronizationTest.class);
         runTests("lab9 (FileCleaner)", Lab9Test.class);
+        runTests("lab10 (RMI)", Lab10Test.class);
     }
 
     private static void runTests(String labName, Class<?> testClass) {

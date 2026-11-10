@@ -7,6 +7,7 @@ import com.hensin.lab5.MainStringOps;
 import com.hensin.lab7.MainThreads;
 import com.hensin.lab8.MainTrafficLight;
 import com.hensin.lab9.MainFileCleaner;
+import com.hensin.lab10.MainRmiClient;
 
 
 import java.util.ArrayList;
@@ -55,6 +56,12 @@ public class App {
         @Override public void run(Scanner scanner) { MainFileCleaner.run(scanner); }
     }
 
+    public static class RmiClientLab implements LabWork {
+        @Override public String getTitle() { return "lab10 (RMI Client)"; }
+        @Override public void run(Scanner scanner) { MainRmiClient.run(scanner); }
+    }
+
+
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -69,6 +76,7 @@ public class App {
         labs.add(new ThreadsLab());
         labs.add(new TrafficLab());
         labs.add(new FileDeleterLab());
+        labs.add(new RmiClientLab());
         
         Scanner scanner = new Scanner(System.in);
         
