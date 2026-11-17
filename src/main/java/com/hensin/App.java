@@ -8,6 +8,7 @@ import com.hensin.lab7.MainThreads;
 import com.hensin.lab8.MainTrafficLight;
 import com.hensin.lab9.MainFileCleaner;
 import com.hensin.lab10.MainRmiClient;
+import com.hensin.lab11.MainGraph;
 
 
 import java.util.ArrayList;
@@ -61,6 +62,12 @@ public class App {
         @Override public void run(Scanner scanner) { MainRmiClient.run(scanner); }
     }
 
+    public static class GraphLab implements LabWork {
+        @Override public String getTitle() { return "lab11 (Graph)"; }
+        @Override public void run(Scanner scanner) { MainGraph.run(scanner); }
+    }
+
+
 
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
@@ -77,6 +84,7 @@ public class App {
         labs.add(new TrafficLab());
         labs.add(new FileDeleterLab());
         labs.add(new RmiClientLab());
+        labs.add(new GraphLab());
         
         Scanner scanner = new Scanner(System.in);
         

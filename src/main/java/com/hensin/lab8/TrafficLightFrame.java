@@ -34,7 +34,7 @@ public class TrafficLightFrame extends JFrame {
     private final Font uiFont = new Font("SansSerif", Font.PLAIN, 14);
 
     public TrafficLightFrame() {
-        super("Светофор — лабораторная работа №8");
+        super("Светофор — лабораторная работа 8");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(620, 680);
         setLocationRelativeTo(null);
@@ -47,7 +47,6 @@ public class TrafficLightFrame extends JFrame {
         applyOutputFont();
     }
 
-    // 1. Меню
     private void setupMenu() {
         JMenuBar bar = new JMenuBar();
 
@@ -61,8 +60,8 @@ public class TrafficLightFrame extends JFrame {
         aboutItem.addActionListener(e ->
                 JOptionPane.showMessageDialog(this,
                         "Лабораторная работа №8\nПриложение-светофор\n\n" +
-                                "Вход: время зелёного, полосы, машины, сек/машина.\n" +
-                                "Выход: сколько машин останется после зелёного.\n\n",
+                        "Вход: время зелёного, полосы, машины, сек/машина.\n" +
+                        "Выход: сколько машин останется после зелёного.\n\n",
                         "О программе", JOptionPane.INFORMATION_MESSAGE));
         helpMenu.add(aboutItem);
 
@@ -71,7 +70,6 @@ public class TrafficLightFrame extends JFrame {
         setJMenuBar(bar);
     }
 
-    // 2. Размещение компонентов
     private void setupLayout() {
         JPanel root = new JPanel(new BorderLayout(8, 8));
         root.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -123,7 +121,6 @@ public class TrafficLightFrame extends JFrame {
         panel.add(field);
     }
 
-    // 3. Наполняем списки шрифтов и размеров
     private void initFontChoosers() {
         String[] families = GraphicsEnvironment
                 .getLocalGraphicsEnvironment()
@@ -143,22 +140,18 @@ public class TrafficLightFrame extends JFrame {
         fontSizeCombo.setPreferredSize(new Dimension(60, 24));
     }
 
-    // 4. Обработчики событий
     private void setupEvents() {
         calculateBtn.addActionListener(e -> onCalculate());
         resetBtn.addActionListener(e -> resetToInitialState());
 
-        showDetails.addActionListener(e ->
-                detailsArea.setVisible(showDetails.isSelected()));
+        showDetails.addActionListener(e -> detailsArea.setVisible(showDetails.isSelected()));
 
-        // Один слушатель на все три элемента управления шрифтом
         ActionListener fontListener = e -> applyOutputFont();
         fontFamilyCombo.addActionListener(fontListener);
         fontSizeCombo.addActionListener(fontListener);
         fontBoldCheck.addActionListener(fontListener);
     }
 
-    // 5. Возврат к начальному состоянию
     private void resetToInitialState() {
         greenField.setText("");
         lanesField.setText("");

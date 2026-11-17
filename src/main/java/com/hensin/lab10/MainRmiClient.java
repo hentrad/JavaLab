@@ -16,17 +16,15 @@ public class MainRmiClient {
 
     public static void run(Scanner scanner) {
         try {
-            // Подключаемся к реестру на localhost
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1100);
             
-            // Получаем удаленный объект ПО ИНТЕРФЕЙСУ
             MicrobeService service = (MicrobeService) registry.lookup("MicrobeService");
 
             boolean valid = false;
             int time = 0;
             do {
                 try {
-                    System.out.print("Введите момент времени (0..30): ");
+                    System.out.print("момент времени (0..30): ");
                     time = scanner.nextInt();
                     valid = time >= 0 && time <= 30;
                 } catch (InputMismatchException e) {
@@ -34,12 +32,11 @@ public class MainRmiClient {
                 }
             } while (!valid);
 
-            // Вызов удаленного метода
             long result = service.countBacteria(time);
             System.out.println("Количество бактерий (получено с сервера): " + result);
 
         } catch (java.rmi.ConnectException e) {
-            System.out.println("Ошибка: RMI-сервер не запущен. Сначала запустите RmiServer.");
+            System.out.println("сервер не запущен");
         } catch (LabException e) {
             System.out.println("Ошибка lab3 (от сервера): " + e.getMessage());
         } catch (Exception e) {

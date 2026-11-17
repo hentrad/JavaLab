@@ -23,7 +23,7 @@ public class MainFileCleaner {
                 return;
             }
 
-            System.out.print("Вы уверены, что хотите удалить ВСЁ содержимое папки '" + path + "'? [y/n]: ");
+            System.out.print("удалить ВСЁ содержимое папки '" + path + "'? [y/n]: ");
             String confirm = scanner.nextLine().trim();
 
             if (!confirm.equalsIgnoreCase("y")) {
@@ -32,11 +32,11 @@ public class MainFileCleaner {
 
             try {
                 cleaner.deleteAllFiles(path);
-                System.out.println("Папка очищена: " + path);
+                System.out.println("папка очищена: " + path);
                 valid = true;
                 
             } catch (LabException e) {
-                System.out.println("\n[ОШИБКА] " + e.getMessage());
+                System.out.println("\n error " + e.getMessage());
             }
         } while (!valid);
     }

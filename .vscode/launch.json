@@ -3,6 +3,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MainTrafficLight",
+            "request": "launch",
+            "mainClass": "com.hensin.lab8.MainTrafficLight",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainGraph",
+            "request": "launch",
+            "mainClass": "com.hensin.lab11.MainGraph",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "MainRmiClient",
+            "request": "launch",
+            "mainClass": "com.hensin.lab10.MainRmiClient",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
+            "name": "RmiServer",
+            "request": "launch",
+            "mainClass": "com.hensin.lab10.RmiServer",
+            "projectName": "java_ca206b08"
+        },
+        {
+            "type": "java",
             "name": "MainFileCleaner",
             "request": "launch",
             "mainClass": "com.hensin.lab9.MainFileCleaner",
